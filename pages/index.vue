@@ -14,32 +14,17 @@
         @click="onPinClick(m)"
       />
     </GmapMap>
-
-    <v-dialog v-model="dialog" max-width="600">
-      <v-card>
-        <v-card-title class="headline">
-          {{ dialogContent !== null ? dialogContent.name : '' }}
-        </v-card-title>
-
-        <v-card-text>ここにサービスの詳細</v-card-text>
-
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="gray darken-1" text @click="dialog = false"
-            >閉じる</v-btn
-          >
-          <v-btn color="green darken-1" text @click="dialog = false"
-            >予定に追加</v-btn
-          >
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+    <place-details-modal v-model="dialog" :dialog-content="dialogContent" />
   </v-layout>
 </template>
 
 <script>
 import data from '@/plugins/data.json'
+import placeDetailsModal from '@/components/placeDetailsModal'
 export default {
+  components: {
+    placeDetailsModal
+  },
   data() {
     return {
       markers: [],
@@ -76,7 +61,6 @@ export default {
           this.markers = data
           break
         default:
-          console.log('Default called')
           this.markers = data.filter((e) => {
             return e.genre === decodeURI(this.$route.query.type)
           })
