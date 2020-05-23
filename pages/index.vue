@@ -14,13 +14,19 @@
         @click="onPinClick(m)"
       />
     </GmapMap>
-    <place-details-modal v-model="dialog" :dialog-content="dialogContent" />
+    <place-details-modal
+      v-model="dialog"
+      :content="dialogContent"
+      :travel-id="travelId"
+    />
   </v-layout>
 </template>
 
 <script>
 import data from '@/plugins/data.json'
 import placeDetailsModal from '@/components/placeDetailsModal'
+import placeDetails from '@/plugins/placeDetails'
+
 export default {
   components: {
     placeDetailsModal
@@ -29,12 +35,14 @@ export default {
     return {
       markers: [],
       dialog: false,
-      dialogContent: null
+      dialogContent: null,
+      travelId: ''
     }
   },
   mounted() {
     this.$nuxt.$emit('updateHeader', '見る')
     this.createTable()
+    this.travelId = this.$route.query.travelId
   },
   methods: {
     createTable() {
@@ -68,7 +76,11 @@ export default {
     },
     onPinClick(object) {
       this.dialog = true
-      this.dialogContent = object
+      placeDetails(object.placeId).then((res) => {
+        const obj = object
+        obj.details = res
+        this.dialogContent = obj
+      })
     }
   }
 }
