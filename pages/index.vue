@@ -4,7 +4,7 @@
       :center="{ lat: 10, lng: 10 }"
       :zoom="7"
       map-type-id="terrain"
-      style="width: 500px; height: 300px"
+      style="width: 100vw; height:100vh;margin:0;"
     >
       <GmapMarker
         v-for="(m, index) in markers"
@@ -27,6 +27,9 @@ export default {
         { position: { lng: 10.1, lat: 10 } }
       ]
     }
+  },
+  mounted() {
+    this.$nuxt.$emit('updateHeader', '見る')
   }
 }
 </script>

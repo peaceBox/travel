@@ -1,6 +1,8 @@
 <template>
   <v-app dark>
-    <v-app-bar fixed app>{{ title }}</v-app-bar>
+    <v-app-bar fixed app color="#CC3F50"
+      ><h3 style="color:#ffffff">{{ title }}</h3></v-app-bar
+    >
     <v-content>
       <v-container>
         <nuxt />
