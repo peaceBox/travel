@@ -14,6 +14,26 @@
         @click="onPinClick(m)"
       />
     </GmapMap>
+
+    <v-dialog v-model="dialog" max-width="600">
+      <v-card>
+        <v-card-title class="headline">
+          {{ dialogContent !== null ? dialogContent.name : '' }}
+        </v-card-title>
+
+        <v-card-text>ここにサービスの詳細</v-card-text>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="gray darken-1" text @click="dialog = false"
+            >閉じる</v-btn
+          >
+          <v-btn color="green darken-1" text @click="dialog = false"
+            >予定に追加</v-btn
+          >
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-layout>
 </template>
 
@@ -22,7 +42,9 @@ import data from '@/plugins/data.json'
 export default {
   data() {
     return {
-      markers: []
+      markers: [],
+      dialog: false,
+      dialogContent: null
     }
   },
   mounted() {
@@ -61,7 +83,8 @@ export default {
       }
     },
     onPinClick(object) {
-      window.alert(object.name)
+      this.dialog = true
+      this.dialogContent = object
     }
   }
 }
