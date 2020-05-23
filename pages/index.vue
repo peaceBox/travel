@@ -3,7 +3,7 @@
     <GmapMap
       :center="{ lat: 34.402934, lng: 132.456019 }"
       :zoom="10"
-      map-type-id="terrain"
+      map-type-id="roadmap"
       class="gmap"
     >
       <GmapMarker
