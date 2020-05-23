@@ -22,10 +22,7 @@ import data from '@/plugins/data.json'
 export default {
   data() {
     return {
-      markers: [
-        { position: { lng: 10.2, lat: 10 } },
-        { position: { lng: 10.1, lat: 10 } }
-      ]
+      markers: []
     }
   },
   mounted() {
