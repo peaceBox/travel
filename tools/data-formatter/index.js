@@ -1,7 +1,7 @@
 const axios = require('axios')
 const data = require('./data')
 
-const APIKEY = 'put your Google Place API token'
+const APIKEY = 'AIzaSyCgOm__vdrF5Ta3wWvrVW6Wq7FSMdU7O-k'
 
 let progress = 0
 
@@ -21,9 +21,10 @@ function getHello() {
           res.data.results &&
           res.data.results.length > 0
         ) {
-          data[progress].placeId = res.data.results[0].id
+          console.log(res.data.results[0])
+          data[progress].placeId = res.data.results[0].place_id
           console.error(
-            res.data.results[0].id +
+            res.data.results[0].place_id +
               ' ' +
               e.name +
               '→' +
