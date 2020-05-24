@@ -40,7 +40,7 @@ export default {
     }
   },
   mounted() {
-    this.$nuxt.$emit('updateHeader', '見る')
+    this.$nuxt.$emit('updateHeader', decodeURI(this.$route.query.type))
     this.createTable()
     this.travelId = this.$route.query.travelId
   },
