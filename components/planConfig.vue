@@ -4,7 +4,11 @@
       <v-list-item-content>
         <div class="overline mb-4"></div>
         <v-list-item-title class="headline mb-1">
-          <v-text-field label="旅行のタイトル"></v-text-field>
+          <v-text-field
+            v-model="caption"
+            label="旅行のタイトル"
+            @change="saveCaption()"
+          ></v-text-field>
         </v-list-item-title>
         <v-row justify="space-around">
           <v-date-picker
@@ -23,7 +27,8 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      selected: []
+      selected: [],
+      caption: ''
     }
   },
   computed: {
@@ -41,6 +46,14 @@ export default {
           travelId: this.$route.query.travelId,
           startDate: Math.floor(this.startDate.getTime() / 1000),
           finishDate: Math.floor(this.finishDate.getTime() / 1000)
+        })
+        .then((res) => {})
+    },
+    saveCaption() {
+      axios
+        .post(`https://api.travel.sugokunaritai.dev/caption`, {
+          travelId: this.$route.query.travelId,
+          caption: this.caption
         })
         .then((res) => {})
     }

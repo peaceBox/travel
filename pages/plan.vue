@@ -49,8 +49,8 @@ export default {
         `https://api.travel.sugokunaritai.dev/place?travelId=${this.$route.query.travelId}`
       )
       .then((res) => {
-        res.data.forEach((res, i) => {
-          const p = { placeId: res.placeId, uuid: res.uuid }
+        res.data.forEach((e, i) => {
+          const p = { placeId: e.placeId, uuid: e.UUID }
           this.places.push(p)
         })
       })
@@ -60,20 +60,24 @@ export default {
     save() {
       const placeData = []
       this.places.forEach((e, i) => {
-        const tmp = {
-          placeId: e.placeId,
-          turn: i,
-          date: new Date(), // TODO: 日付実装
-          UUID: e.uuid
-        }
+        if (e.placeId !== undefined) {
+          const tmp = {
+            placeId: e.placeId,
+            turn: i,
+            date: new Date(), // TODO: 日付実装
+            UUID: e.uuid
+          }
 
-        placeData.push(tmp)
+          placeData.push(tmp)
+        }
       })
 
       axios
-        .post(
-          `https://api.travel.sugokunaritai.dev/place?travelId=${this.$route.query.travelId}`
-        )
+
+        .post(`https://api.travel.sugokunaritai.dev/turn`, {
+          placeData,
+          travelId: this.$route.query.travelId
+        })
         .then((res) => {
           console.log(res)
         })
