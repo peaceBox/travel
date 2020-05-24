@@ -7,8 +7,6 @@ export default (placeId) => {
         `https://api.travel.sugokunaritai.dev/map/details?placeId=${placeId}`
       )
       .then((res) => {
-        console.log(res.data.result)
-
         resolve(res.data.result)
       })
   })

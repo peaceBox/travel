@@ -11,6 +11,7 @@
             v-model="selected"
             color="#CC3F50"
             range
+            @change="saveDate()"
           ></v-date-picker>
         </v-row>
       </v-list-item-content>
@@ -18,10 +19,30 @@
   </v-card>
 </template>
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
       selected: []
+    }
+  },
+  computed: {
+    startDate() {
+      return new Date(this.selected[0])
+    },
+    finishDate() {
+      return new Date(this.selected[1])
+    }
+  },
+  methods: {
+    saveDate() {
+      axios
+        .post(`https://api.travel.sugokunaritai.dev/date`, {
+          travelId: this.$route.query.travelId,
+          startDate: Math.floor(this.startDate.getTime() / 1000),
+          finishDate: Math.floor(this.finishDate.getTime() / 1000)
+        })
+        .then((res) => {})
     }
   }
 }
