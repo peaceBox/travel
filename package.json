@@ -15,7 +15,8 @@
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/dotenv": "^1.4.1",
     "nuxt": "^2.0.0",
-    "vue2-google-maps": "^0.10.7"
+    "vue2-google-maps": "^0.10.7",
+    "vuedraggable": "^2.23.2"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^2.0.0",
