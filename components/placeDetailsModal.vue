@@ -29,10 +29,6 @@ export default {
   props: ['value', 'content', 'travelId'],
   methods: {
     addPlace() {
-      console.log({
-        travelId: this.travelId,
-        placeId: this.content.placeId
-      })
       axios
         .post('https://api.travel.sugokunaritai.dev/place', {
           travelId: this.travelId,
